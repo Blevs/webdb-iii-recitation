@@ -1,0 +1,64 @@
+* WebDB Recitation III
+
+  Today we will be working with multi-table queries on an existing database schema.
+
+** Queries
+   You can connect to a local sqlite database on the command line by running the
+   command ~sqlite3 dbName.sqlite3~. Navigate into the ~/data~ directory and open
+   the ~dev.sqlite3~ database this way. You can now run SQL queries against it.
+   (Don't forget to end your commands with a ~;~).
+   
+   You can exit by pressing ~CTRL-d~. View the tables and their schema with the
+   commands ~.tables~ and ~.schema --indent table_name~. For a more legible list of
+   a tables columns use ~PRAGMA table_info('table_name')~. To have column names
+   appear in query output run ~.headers ON~ and ~.mode column~.
+   
+   See https://sqlite.org/cli.html for more configuration options.
+   
+   We will be using the ~books.db3~ in the root of the repository.
+
+*** Select all books with their publishers
+    # #+begin_src sql
+    #   SELECT title, publisher FROM books JOIN publishers ON publishers.id = books.publisher_id;
+    # #+end_src
+    
+*** Display all reviews with the user name, rating and book title where the rating is above 4
+    # #+begin_src sql
+    #   SELECT reviews.rating, users.username, books.title FROM reviews
+    #   JOIN users ON users.id = reviews.user_id
+    #   JOIN books ON books.id = reviews.book_id
+    #   WHERE reviews.rating > 4;
+    # #+end_src
+
+*** Display all books written by author 6 with the book titles and author names
+    # #+begin_src sql
+    #   SELECT books.title, authors.name FROM books_authors
+    #   JOIN books ON books.id = books_authors.author_id
+    #   JOIN authors ON authors.id = books_authors.book_id;
+    # #+end_src
+
+** API
+   Write helpers and crud routes for owners and pets, with the ability to get
+   all pets belonging to a specific owner.
+
+** Schema
+
+*** ~owners~
+    | name  | type         | notnull | pk  |
+    | id    | integer      | yes     | yes |
+    | name  | varchar(255) | yes     |     |
+    | email | varchar(255) | yes     |     |
+
+*** ~species~
+    | name   | type         | notnull | pk  |
+    | id     | integer      | yes     | yes |
+    | specie | varchar(255) | yes     |     |
+
+*** ~pets~
+    | name              | type         | not null | pk  | fk         |
+    | id                | integer      | yes      | yes |            |
+    | name              | varchar(255) | yes      |     |            |
+    | age               | integer      | yes      |     |            |
+    | owner_id          | integer      | yes      |     | owners.id  |
+    | care_instructions | text         |          |     |            |
+    | species_id        | integer      | yes      |     | species.id |

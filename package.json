@@ -1,0 +1,21 @@
+{
+  "name": "webdb-iii-recitation",
+  "version": "1.0.0",
+  "description": "Recitation tracking goals from lambdaschool/webdb-iii-challenge",
+  "main": "index.js",
+  "repository": "https://github.com/Blevs/webdb-iii-recitation",
+  "author": "Henry Blevins <heblevi@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node index.js",
+    "server": "nodemon index.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "knex": "^0.19.4",
+    "sqlite3": "^4.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.2"
+  }
+}

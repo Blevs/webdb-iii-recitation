@@ -18,24 +18,25 @@
    We will be using the ~books.db3~ in the root of the repository.
 
 *** Select all books with their publishers
-    # #+begin_src sql
-    #   SELECT title, publisher FROM books JOIN publishers ON publishers.id = books.publisher_id;
-    # #+end_src
+    #+begin_src sql
+      SELECT title, publisher FROM books
+      JOIN publishers ON publishers.id = books.publisher_id;
+    #+end_src
     
 *** Display all reviews with the user name, rating and book title where the rating is above 4
-    # #+begin_src sql
-    #   SELECT reviews.rating, users.username, books.title FROM reviews
-    #   JOIN users ON users.id = reviews.user_id
-    #   JOIN books ON books.id = reviews.book_id
-    #   WHERE reviews.rating > 4;
-    # #+end_src
+    #+begin_src sql
+      SELECT reviews.rating, users.username, books.title FROM reviews
+      JOIN users ON users.id = reviews.user_id
+      JOIN books ON books.id = reviews.book_id
+      WHERE reviews.rating > 4;
+    #+end_src
 
 *** Display all books written by author 6 with the book titles and author names
-    # #+begin_src sql
-    #   SELECT books.title, authors.name FROM books_authors
-    #   JOIN books ON books.id = books_authors.author_id
-    #   JOIN authors ON authors.id = books_authors.book_id;
-    # #+end_src
+    #+begin_src sql
+      SELECT books.title, authors.name FROM books_authors
+      JOIN books ON books.id = books_authors.author_id
+      JOIN authors ON authors.id = books_authors.book_id;
+    #+end_src
 
 ** API
    Write helpers and crud routes for owners and pets, with the ability to get

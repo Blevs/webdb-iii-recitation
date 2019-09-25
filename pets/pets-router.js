@@ -1,7 +1,8 @@
 const router = require('express').Router();
 const Pets = require('./pets-model.js');
+const restrict = require('../middleware/restrict.js');
 
-router.get('/', (req, res) => {
+router.get('/', restrict, (req, res) => {
   Pets.get()
     .then(pets => {
       res.status(200).json(pets);
